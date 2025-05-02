@@ -304,6 +304,20 @@ play_episode() {
     [ "$log_episode" = 1 ] && [ "$player_function" != "debug" ] && [ "$player_function" != "download" ] && command -v logger >/dev/null && logger -t ani-cli "${allanime_title}${ep_no}"
     [ "$skip_intro" = 1 ] && skip_flag="$(ani-skip -q "$mal_id" -e "$ep_no")"
     [ -z "$episode" ] && get_episode_url
+    echo "Episode ${episode}"
+
+      cmd=(
+        "$refr_flag"
+        "$episode"
+        "${allanime_title} Episode ${ep_no}"
+          )
+
+      # dump as JSON to stdout
+      printf '%s\n' "$(printf '%s\0' "${cmd[@]}" \
+      | python3 -c 'import sys,json; args=sys.stdin.read().split("\0")[:-1]; print(json.dumps(args))')"
+
+      exit 0
+
     # shellcheck disable=SC2086
     case "$player_function" in
         debug)
@@ -311,8 +325,36 @@ play_episode() {
             printf "%s\n" "$episode"
             ;;
         mpv*)
+            printf 'Media URL: %s\n' "$episode" >&2
+            printf 'no_detach: %s\n' "$no_detach" >&2
+
+            printf 'Player Function: %s\n' "$player_function" >&2
+            
             if [ "$no_detach" = 0 ]; then
-                nohup $player_function $skip_flag --force-media-title="${allanime_title}Episode ${ep_no}" "$episode" $subs_flag $refr_flag >/dev/null 2>&1 &
+                 #echo $player_function $skip_flag --force-media-title="${allanime_title}Episode ${ep_no}" "$episode" $subs_flag $refr_flag
+                #printf "%s %s --force-media-title=%sEpisode %s%s%s%s\n" "$player_function" "$skip_flag" "${allanime_title}" "${ep_no}" "$episode" "$subs_flag" "$refr_flag"
+#                printf '%s %s --force-media-title="%s Episode %s" %s %s %s\n' \
+#                "$player_function" \
+#                "$skip_flag" \
+#                "$allanime_title" \
+#                "$ep_no" \
+#                "$episode" \
+#                "$subs_flag" \
+#                "$refr_flag" >&2
+
+                  # build the argv array
+                  cmd=(
+                      "$refr_flag"
+                      "$episode"
+                      "${allanime_title} Episode ${ep_no}"
+                  )
+
+                  # dump as JSON to stdout
+                  printf '%s\n' "$(printf '%s\0' "${cmd[@]}" \
+                    | python3 -c 'import sys,json; args=sys.stdin.read().split("\0")[:-1]; print(json.dumps(args))')"
+
+
+                exit 0
             else
                 $player_function $skip_flag $subs_flag $refr_flag --force-media-title="${allanime_title}Episode ${ep_no}" "$episode"
                 mpv_exitcode=$?
