@@ -241,7 +241,7 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling(
-        allowed_updates=Update.ALL_TYPES,
+        allowed_updates=Update.MESSAGE,
         drop_pending_updates=True
     )
 

@@ -18,8 +18,17 @@ RUN pip install \
 ### Final stage: minimal runtime ###
 FROM python:3.13-alpine
 
-# Install bash at runtime to launch the bash script
-RUN apk add --no-cache bash ffmpeg
+# runtime dependencies
+RUN apk add --no-cache \
+      bash       \
+      ffmpeg     \
+      grep       \
+      sed        \
+      curl       \
+      mpv        \
+      aria2      \
+      fzf        \
+      patch
 
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
