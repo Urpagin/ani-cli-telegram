@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 version_number="4.10.0"
 

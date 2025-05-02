@@ -6,6 +6,8 @@ FROM python:3.13-alpine AS builder
 RUN apk add --no-cache \
       gcc musl-dev libffi-dev openssl-dev
 
+RUN apk add --no-cache bash
+
 WORKDIR /app
 COPY src/requirements.txt .
 
