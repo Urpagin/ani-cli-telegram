@@ -3,6 +3,11 @@
 > [!IMPORTANT]  
 > Only works on systems that can execute bash scripts and use ffmpeg.
 
+## What is it?
+
+Watch any anime with friends on your Telegram group.
+You can use the `/anime` command to launch the streaming of an anime.
+
 ## Requirements
 
 - ffmpeg
