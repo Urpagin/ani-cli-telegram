@@ -42,6 +42,13 @@ STREAM_URL=...
 2. Bot Settings > Group Privacy > then disable the privacy mode.
 3. Invite your bot to your group. If you've already invited it, kick him and re-invite it.
 
+
+## Docker
+
+1. Populate the `.env` file at the root of the project.
+2. `sudo docker compose up -d --build`
+
+
 ## Completeness & Quality
 
 "Quick and dirty".

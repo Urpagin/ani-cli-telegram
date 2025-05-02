@@ -1,0 +1,15 @@
+services:
+  ani-cli-telegram:
+    container_name: ani-cli-telegram
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./src:/app
+      - ./.env:/app/.env:ro,z       # make the local .env visible in /app
+    working_dir: /app
+    # If you want to override the entrypoint for an interactive shell:
+    # entrypoint: ["/bin/bash"]
+    # Otherwise, this will run `python main.py` by default:
+    command: [ ]
