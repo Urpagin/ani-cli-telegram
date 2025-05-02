@@ -53,7 +53,7 @@ ffmpeg_instances: set[tuple[int, str]] = set()
 def run_ani_cli(anime: str, range_ep: str, idx: str) -> str:
     """Runs ani-cli and returns the output"""
     cmd = [
-        '/home/urpagin/Documents/PROGRAMMING/other/ani-cli-telegram/ani-cli',
+        './ani-cli',
         anime,
         '-S', idx,
         '-e', range_ep,
