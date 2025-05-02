@@ -1,23 +1,31 @@
 # Dockerfile
-FROM python:3.12-slim
+### Builder stage: install packages into /install ###
+FROM python:3.11-alpine AS builder
 
-# Prevents Python from writing .pyc files and buffering stdout/stderr
+# build deps only
+RUN apk add --no-cache \
+      gcc musl-dev libffi-dev openssl-dev
+
+WORKDIR /app
+COPY src/requirements.txt .
+
+# install into a staging dir, without cache
+RUN pip install \
+      --prefix=/install \
+      --no-cache-dir \
+      -r requirements.txt
+
+### Final stage: minimal runtime ###
+FROM python:3.11-alpine
+
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
+# copy only the installed libraries
+COPY --from=builder /install /usr/local
+
 WORKDIR /app
-
-# Install build dependencies and then clean up
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements and install
-COPY src/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code (excluding venv)
 COPY src/ .
 
-# Default command
-ENTRYPOINT ["python", "main.py"]
+# -OO strips docstrings; use ENTRYPOINT so you can still override
+ENTRYPOINT ["python", "-OO", "main.py"]

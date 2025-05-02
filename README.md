@@ -46,7 +46,7 @@ STREAM_URL=...
 ## Docker
 
 1. Populate the `.env` file at the root of the project.
-2. `sudo docker compose up -d --build`
+2. `COMPOSE_BAKE=true sudo docker compose up -d --build`
 
 
 ## Completeness & Quality
