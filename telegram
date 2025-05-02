@@ -1,9 +1,0 @@
-#!/bin/bash
-
-ffmpeg -re \
-  -headers "Referer: https://allmanga.to\r\n" \
-  -i "https://tools.fast4speed.rsvp//media7/videos/3LtStcZaR9iksAgAx/sub/1" \
-  -c copy \
-  -f flv \
-  "rtmps://dc4-1.rtmp.t.me/s/2258987963:10pQdWp7HUtQl52bcKeL4g"
-

@@ -23,8 +23,8 @@ BOT_TOKEN=...
 STREAM_URL=...
 ```
 
-3. Setup python. (make a venv and `pip install -r requirements.txt` in the bot directory)
-4. Launch the `bot/main.py` file.
+3. Setup python. (make a venv and `pip install -r requirements.txt` in the src directory)
+4. Launch the `src/main.py` file.
 5. Launch the stream from your telegram client. *You can now use the bot*
 6. `/help` on your telegram group
 
@@ -45,3 +45,7 @@ STREAM_URL=...
 ## Completeness & Quality
 
 "Quick and dirty".
+
+## Acknowledgements
+
+Forked from [pystardus](https://github.com/pystardust)'s [ani-cli](https://github.com/pystardust/ani-cli) repository.
