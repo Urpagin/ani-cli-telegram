@@ -23,10 +23,10 @@ BOT_TOKEN=...
 STREAM_URL=...
 ```
 
-4. Setup python. (make a venv and `pip install -r requirements.txt` in the bot directory)
-3. Launch the `bot/main.py` file.
-4. Launch the stream from your telegram client. *You can now use the bot*
-4. `/help` on your telegram group
+3. Setup python. (make a venv and `pip install -r requirements.txt` in the bot directory)
+4. Launch the `bot/main.py` file.
+5. Launch the stream from your telegram client. *You can now use the bot*
+6. `/help` on your telegram group
 
 ## Stream URL
 
