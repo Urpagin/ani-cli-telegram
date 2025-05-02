@@ -209,6 +209,11 @@ async def playing_command(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
         await update.message.reply_text(res)
 
 
+async def stop_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    cleanup_ffmpeg()
+    await update.message.reply_text("Stopped streaming.")
+
+
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /help is issued."""
     await update.message.reply_text("Execute these commands for more detail about them:\n- /anime\n- /playing")
@@ -235,6 +240,7 @@ def main() -> None:
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(CommandHandler("anime", anime_command))
     application.add_handler(CommandHandler("playing", playing_command))
+    application.add_handler(CommandHandler("stop", stop_command))
 
     # Register the error handler
     application.add_error_handler(error_handler)
