@@ -6,8 +6,6 @@ FROM python:3.13-alpine AS builder
 RUN apk add --no-cache \
       gcc musl-dev libffi-dev openssl-dev
 
-RUN apk add --no-cache bash
-
 WORKDIR /app
 COPY src/requirements.txt .
 
@@ -19,6 +17,10 @@ RUN pip install \
 
 ### Final stage: minimal runtime ###
 FROM python:3.13-alpine
+
+# Install bash at runtime to launch the bash script
+RUN apk add --no-cache bash ffmpeg
+
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
