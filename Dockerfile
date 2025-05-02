@@ -1,6 +1,6 @@
 # Dockerfile
 ### Builder stage: install packages into /install ###
-FROM python:3.11-alpine AS builder
+FROM python:3.13-alpine AS builder
 
 # build deps only
 RUN apk add --no-cache \
@@ -16,7 +16,7 @@ RUN pip install \
       -r requirements.txt
 
 ### Final stage: minimal runtime ###
-FROM python:3.11-alpine
+FROM python:3.13-alpine
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
