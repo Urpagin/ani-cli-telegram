@@ -72,11 +72,11 @@ def run_ani_cli(anime: str, range_ep: str, idx: str) -> str:
 
 
 def cleanup_ffmpeg():
-    """Kill all the ffmpeg processes."""
+    """RUTHLESSLY Kill all the ffmpeg processes."""
     with ffmpeg_lock:
         for pid, _ in ffmpeg_instances:
             try:
-                kill_sig = signal.SIGTERM
+                kill_sig = signal.SIGKILL
                 os.waitpid(pid, 0)
                 os.kill(pid, kill_sig)
                 logger.info(f"KILLED PID {pid} with signal {kill_sig}!")
